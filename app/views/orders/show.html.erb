@@ -1,0 +1,91 @@
+  <%= render  "shared/navbar" %>
+
+
+  <div class="gig-view-full" data-channel-subscribe="order" data-order-id="<%= @order.id %>">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="c-shadow">
+            <h3><%= @order.title %></h3>
+            <hr>
+                        <figure>
+                            <%= image_tag gig_cover(@gig) if @gig %>
+                            <%= image_tag 'icon_default_image.png' if @request %>
+                        </figure>
+            
+          </div>
+          <div class="c-shadow mt-4">
+            <h3>Order Summary</h3>
+            <hr>
+            <p class="mb-3"><%= @gig.description %></p>
+            <ul class="mt-4 mb-4">
+
+            </ul>
+            <strong>Order Details</strong>
+            <ul class="mt-4">
+              <li>Seller: <%= @order.seller_name %> </li>
+              <li>Order number: <%= @order.id %></li>
+              <li>Order date: <%= @order.created_at.strftime('%d, %b %Y') %></li>
+
+            </ul>
+          </div>
+          <div class="c-shadow mt-4 mb-4">
+            <h3>Comments</h3>
+            <hr>
+            <div class="media-body" id="comment-list">
+                 <% @comments.each do |c| %>
+                 <%= render 'orders/comment', comment: c %>
+                 <% end %>
+              </div>
+           
+            <div class="input-group mt-5">
+                 <%= form_with model: Comment.new, id: "new-comment" do |f| %>
+                 <%= f.hidden_field :order_id, value: @order.id %>
+                 <%= f.text_area :content, class: "textarea form-control d-block w-100", placeholder: "Type your comment" ,cols: "100", rows: "3" %>
+                <div class="form-group">
+                  <%= f.file_field :attachment_file, class: "file-input" %>
+                  
+                </div>
+                 <button class="btn c-btn d-block w-100 mt-3">Submit</button>
+                 <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+
+          <div class="job-profile-info">
+            <%= image_tag avatar_url(@gig.user), class: "rounded" %>
+            <div class="text-center mb30">
+              <h2><%= @order.seller_name %>
+              </h2>
+              <a class="c-secondary" data-toggle="modal" data-target="#user-contact">Contact</a>
+
+              </div>
+            <hr>
+            <ul>
+              <li>Seller <strong><%= @order.seller_name %></strong></li>
+              <li>Date <strong><%= @order.created_at.strftime('%d, %b %Y') %></strong></li>
+              <li>Order number <br> <strong><%= @order.id %></strong></li>
+              <li>Total paid <br> <strong>$<%= @order.amount %></strong></li>
+
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <script>
+    $(document).ready(function() {
+        var file = $('.file-input');
+        file.change(function(e) {
+            if (file[0].files.length > 0) {
+                var attachment = file[0].files[0];
+                $('.file-name').text(attachment.name + " (" + attachment.size + " bytes)");
+            }
+        })
+    })
+</script>
+
+

@@ -1,0 +1,172 @@
+<%= render  "shared/navbar" %>
+
+  <div class="package-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="text-center">Choose the best package for your business</h2>
+        </div>
+<% @plans.data.each do |plan| %>
+        <div class="col-md-4">
+
+          <div class="package-item c-shadow text-center">
+            <h3><%= plan.nickname %></h3>
+            <h2><sub>SEK</sub><%= plan.amount / 100 %> <sub>/month</sub></h2>
+            <p>Commission fee is <%= plan.metadata.commission %> % </p>
+                                    <%= form_with url: subscribe_url do |f| %>
+                            <%= f.hidden_field :plan_id, value: plan.id %>
+                            <%= f.submit "Choose", class: "btn btn-primary btn-lg" %>
+                        <% end %>
+          </div>
+
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <h2>Contact Info</h2>
+          <ul>
+            <li>Phone: 125 1254 1245</li>
+            <li>Email: demo@gmail.com</li>
+            <li>Address: 24 kda New York, US</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Useful link</h2>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Legal</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Others link</h2>
+          <ul>
+            <li><a href="#">Rewards club</a></li>
+            <li><a href="#">Contact us via app</a></li>
+            <li><a href="#">Customer service</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Business</h2>
+          <ul>
+            <li><a href="#">Partner directory</a></li>
+            <li><a href="#">Become a partner</a></li>
+            <li><a href="#">Business support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- scripts -->
+<script>
+(function ($) {
+  'use strict';
+
+  if ($('#flat-counter').length > 0) {
+    $('#flat-counter').counterUp({
+      time: 800,
+    });
+  }
+
+  if ($('#msform').length > 0) {
+    //jQuery time
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
+
+    $('.next').click(function () {
+      if (animating) return false;
+      animating = true;
+
+      current_fs = $(this).parent();
+      next_fs = $(this).parent().next();
+
+      //activate next step on progressbar using the index of next_fs
+      $('#progressbar li').eq($('fieldset').index(next_fs)).addClass('active');
+
+      //show the next fieldset
+      next_fs.show();
+      //hide the current fieldset with style
+      current_fs.animate(
+        { opacity: 0 },
+        {
+          step: function (now, mx) {
+            //as the opacity of current_fs reduces to 0 - stored in "now"
+            //1. scale current_fs down to 80%
+            scale = 1 - (1 - now) * 0.2;
+            //2. bring next_fs from the right(50%)
+            left = now * 50 + '%';
+            //3. increase opacity of next_fs to 1 as it moves in
+            opacity = 1 - now;
+            current_fs.css({
+              transform: 'scale(' + scale + ')',
+              position: 'absolute',
+            });
+            next_fs.css({ left: left, opacity: opacity });
+          },
+          duration: 800,
+          complete: function () {
+            current_fs.hide();
+            animating = false;
+          },
+          //this comes from the custom easing plugin
+          easing: 'easeInOutBack',
+        }
+      );
+    });
+
+    $('.previous').click(function () {
+      if (animating) return false;
+      animating = true;
+
+      current_fs = $(this).parent();
+      previous_fs = $(this).parent().prev();
+
+      //de-activate current step on progressbar
+      $('#progressbar li')
+        .eq($('fieldset').index(current_fs))
+        .removeClass('active');
+
+      //show the previous fieldset
+      previous_fs.show();
+      //hide the current fieldset with style
+      current_fs.animate(
+        { opacity: 0 },
+        {
+          step: function (now, mx) {
+            //as the opacity of current_fs reduces to 0 - stored in "now"
+            //1. scale previous_fs from 80% to 100%
+            scale = 0.8 + (1 - now) * 0.2;
+            //2. take current_fs to the right(50%) - from 0%
+            left = (1 - now) * 50 + '%';
+            //3. increase opacity of previous_fs to 1 as it moves in
+            opacity = 1 - now;
+            current_fs.css({ left: left });
+            previous_fs.css({
+              transform: 'scale(' + scale + ')',
+              opacity: opacity,
+            });
+          },
+          duration: 800,
+          complete: function () {
+            current_fs.hide();
+            animating = false;
+          },
+          //this comes from the custom easing plugin
+          easing: 'easeInOutBack',
+        }
+      );
+    });
+
+    $('.submit').click(function () {
+      return false;
+    });
+  }
+})(jQuery);
+
+</script>

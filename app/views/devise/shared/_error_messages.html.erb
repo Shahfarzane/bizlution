@@ -1,0 +1,14 @@
+<% if resource.errors.any? %>
+<script>
+<% resource.errors.full_messages.each do |message| %>
+
+          new Noty ({
+              type: 'error',
+              layout: 'topRight',
+              timeout: '3000',
+              theme: 'sunset',
+              text: '<%= message %>'
+          }).show();
+          <% end %>
+</script>
+<% end %>

@@ -1,0 +1,57 @@
+  <%= render  "shared/navbar" %>
+
+<div class="job-form">
+  <div id="msform">
+    <div class="steps" id="stepsDemo">
+
+      <div class="step-item is-active">
+        <div class="step-marker">1</div>
+        <div class="step-details">
+          <p class="step-title">Overview</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-marker">2</div>
+        <div class="step-details">
+          <p class="step-title">Pricing</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-marker">3</div>
+        <div class="step-details">
+          <p class="step-title">Description</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-marker">4</div>
+        <div class="step-details">
+          <p class="step-title">Gallery</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-marker">5</div>
+        <div class="step-details">
+          <p class="step-title">Publish</p>
+        </div>
+      </div>
+
+      <%= form_for @gig, html: {class: "steps-content m-l-100 m-r-100"} do |f| %>
+            <fieldset>
+        <label for="title">Gig Title</label>
+        <%= f.text_area :title, autocomplete: "title", class: "form-control"%>
+            <label class="label">Category</label>
+            <%= f.select(:category_id, options_for_select(@categories.map{ |c| [c.name, c.id] }),{ class:'custom-select' }) %>
+            <div class=" is-grouped is-grouped-centered m-t-25">
+             <%= f.submit "Save & Continue", class: "next action-button" %>
+         <a href="" data-nav="previous" class="previous action-button">Cancel</a>
+      </fieldset>
+
+      </div>
+    <% end %>
+
+  </div>
+</div>
+</div>
+
+<script src="https://demo-bizlution.netlify.app/assets/js/jquery.easing.min.js"></script>
+<script src="https://demo-bizlution.netlify.app/assets/js/custom.js"></script>

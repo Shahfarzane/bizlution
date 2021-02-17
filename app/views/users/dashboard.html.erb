@@ -1,0 +1,369 @@
+
+
+  <header class="login-header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="/"><%= image_tag 'logo.svg' %></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="menu-user-profile">Services</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'Dashboard', dashboard_path, class: "dropdown-item" %>
+              <%= link_to  "Profile", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to 'Manage Requests', requests_path, class: "dropdown-item" %>
+              <%= link_to 'Post Request', new_request_path, class: "dropdown-item" %>
+              <a class="dropdown-item" href="#">Settings</a>
+              <a class="dropdown-item" href="#">Help & Support</a>
+              <div class="dropdown-divider"></div>
+              <%= link_to  "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+          <li class="nav-item dropdown megamenu-li dmenu">
+            <a class="nav-link dropdown-toggle" href="" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ready for business</a>
+            <div class="dropdown-menu megamenu" aria-labelledby="dropdown02">
+              <div class="row">
+                <div class="col-sm-6 col-lg-3 cus-content mb-4">
+                  <h6>Microsoft Technology</h6>
+                  <a class="dropdown-item" href="#"> Microsoft App Development</a>
+                  <a class="dropdown-item" href="#"> MS Desktop App Development</a>
+                  <a class="dropdown-item" href="#"> SharePoint Development</a>
+                  <a class="dropdown-item" href="#"> ASP.NET Development</a>
+                  <a class="dropdown-item" href="#"> CMS Development</a>
+                </div>
+                <div class="col-sm-6 col-lg-3 cus-content mb-4">
+                  <h6>Cloud Services</h6>
+                  <a class="dropdown-item" href="#"> DevOps</a>
+                  <a class="dropdown-item" href="#"> Amazon Web Services</a>
+                  <a class="dropdown-item" href="#"> Azure Cloud Service</a>
+                  <a class="dropdown-item" href="#"> Google App Engine Services</a>
+                </div>
+                <div class="col-sm-6 col-lg-3 cus-content mb-4">
+                  <h6>Enterprise Services</h6>
+                  <a class="dropdown-item" href="#"> Augmented Reality</a>
+                  <a class="dropdown-item" href="#"> CRM</a>
+                  <a class="dropdown-item" href="#"> Enterprise Mobility
+                    Services</a>
+                  <a class="dropdown-item" href="#"> Blockchain Services</a>
+                  <a class="dropdown-item" href="#"> Business Intelligence</a>
+                </div>
+                <div class="col-sm-6 col-lg-3 cus-content mb-4">
+                  <h6>Digital Marketing</h6>
+                  <a class="dropdown-item" href="#"> Digital Marketing</a>
+                  <a class="dropdown-item" href="#"> PPC Management Services</a>
+                  <a class="dropdown-item" href="#"> E-commerce SEO Services</a>
+                  <a class="dropdown-item" href="#"> Conversion Rate Optimization</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Packages', plans_path, class: "nav-link" %>
+            <%= link_to 'Messages', conversations_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="menu-user-profile"><%= image_tag avatar_url(current_user), class: "rounded" %> <%= current_user.full_name %></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'Dashboard', dashboard_path, class: "dropdown-item" %>
+              <%= link_to  "Profile", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to 'Manage Requests', requests_path, class: "dropdown-item" %>
+              <%= link_to 'Post Request', new_request_path, class: "dropdown-item" %>
+              <%= link_to 'Active Requests', all_requests_path, class: "dropdown-item" %>
+              <%= link_to 'Selling Orders', selling_orders_path, class: "dropdown-item" %>
+              <a class="dropdown-item" href="#">Settings</a>
+              <a class="dropdown-item" href="#">Help & Support</a>
+              <div class="dropdown-divider"></div>
+              <%= link_to  "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="job-profile mb-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 col-lg-3">
+          <div class="job-profile-info">
+            <%= image_tag avatar_url(current_user) %>
+            <div class="text-center mb30">
+              <h2> <%= current_user.full_name %>
+              </h2>
+              <div class="job-profile-rating user-avatar-upload">
+                <%= form_for :user, url: users_edit_url(@user), action: :update, method: :post do |f| %>
+                <div class="custom-file">
+                  <%= f.file_field :avatar, class: "custom-file-input", onchange: "this.form.submit();" %>
+                  <span><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8zM5 4.854a.5.5 0 0 0 .707 0L8 2.56l2.293 2.293A.5.5 0 1 0 11 4.146L8.354 1.5a.5.5 0 0 0-.708 0L5 4.146a.5.5 0 0 0 0 .708z" />
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 2z" />
+                    </svg> Upload Avatar</span>
+                </div>
+                <% end %>
+              </div>
+              <a href="tel:123-456-7890" class="job-profile-rating c-btn c-white d-table mt-3 mx-auto">Contact</a>
+            </div>
+            <hr>
+            <ul>
+              <li>Member since <span><strong> <%= current_user.created_at.strftime('%b %Y') %> </strong></span></li>
+              <li>From <strong>
+                  <strong><%= current_user.from %></strong>
+                  <a href="#" class="c-secondary" data-toggle="modal" data-target="#user-from">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg></a></strong></li>
+                                  <li>Language <strong><%= current_user.language %><a href="#" class="c-secondary" data-toggle="modal" data-target="#user-language"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg></a></strong></li>
+
+
+              <li>Online Status <strong><% if current_user.status %> Online <% else %> Offline <% end %> <a href="#" class="c-secondary" data-toggle="modal" data-target="#user-status" aria-controls="user-status"><svg width="1em" height="1em"
+                      viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg></a></strong></li>
+                     <% if @subscription.present? %>
+                        <li>Subscribtion <strong><% if @plan %> <%= @plan.nickname %> <% end %> <a href="#" class="c-secondary" data-toggle="modal" data-target="#user-subscpription" aria-controls="user-status"><svg width="1em" height="1em"
+                      viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg></a></strong></li>
+            <div class="modal fade" id="user-subscpription" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Subscription package</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+               <%= form_with url: remove_subscription_path, method: :delete, html: { id: 'user-subscpription' } do |f| %>
+              <div class="modal-body">
+                <small>Expire at: <%= @subscription.expired_at %></small>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn c-btn" data-dismiss="modal">Close</button>
+                <%= f.submit "Cancel My Subscription", class: "btn c-btn2" %>
+
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+            </ul>
+          </div>
+
+          <div class="job-profile-info mt-4"> About yourself
+            <ul>
+<p>
+              <li>
+              <strong>
+
+                  <%= current_user.about %>
+                    <a href="#" class="c-secondary" data-toggle="modal" data-target="#user-about"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg></a></strong>
+                    </p>
+                    </li>
+
+
+
+
+
+
+
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="col-md-8 col-lg-9">
+          <div class="row">
+            <% current_user.gigs.each do |gig| %>
+            <div class="col-md-6 col-lg-4">
+              <div class="user-gig">
+                <%= link_to edit_gig_path(gig) do %>
+                <figure class="round img-fluid">
+
+                  <%= image_tag gig_cover(gig) %>
+                </figure>
+                <% end %>
+                <h2><%= link_to gig.title, gig_path(gig), class:"a" %></h2>
+
+                <span><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg> <%= gig.average_rating %> (<%= gig.reviews.count %>)</span>
+
+                <% basic_price = gig.pricings.find{ |p| p.pricing_type == 'basic' } %>
+                <a>
+                  <% if !basic_price.nil? %>
+                  <h3>Starting at </h3>
+                  <strong>SEK<%= basic_price.price %></strong>
+                  <% else %>
+                  <strong>
+                    <span>NO PRICING YET</span>
+                  </strong>
+
+                  <% end %>
+                </a>
+              </div>
+            </div>
+            <% end %>
+            <div class="col-md-6 col-lg-4">
+              <div class="user-job-post">
+                <%= link_to new_gig_path do %>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z" />
+                </svg>
+                <h4>Create a new gig</h4>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="user-language" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Update Language</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <%= form_for :user, url: users_edit_url(@user), action: :update, method: :post, html: {id: 'user-language'} do |f| %>
+              <div class="modal-body">
+                <%= f.text_field :language, autofocus: true, autocomplete: 'form', class: 'form-control'%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn c-btn" data-dismiss="modal">Close</button>
+                <%= f.submit "Save", class: "btn c-btn2" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+                <div class="modal fade" id="user-from" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Location</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <%= form_for :user, url: users_edit_url(@user), action: :update, method: :post, html: {id: 'user-from'} do |f| %>
+              <div class="modal-body">
+                <%= f.text_field :from, autofocus: true, autocomplete: 'form', class: 'form-control'%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn c-btn" data-dismiss="modal">Close</button>
+                <%= f.submit "Save", class: "btn c-btn2" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+       <div class="modal fade" id="user-about" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">About</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <%= form_for :user, url: users_edit_url(@user), action: :update, method: :post, html: {id: 'user-about'} do |f| %>
+              <div class="modal-body">
+                <%= f.text_field :about, autofocus: true, autocomplete: 'form', class: 'form-control'%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn c-btn" data-dismiss="modal">Close</button>
+                <%= f.submit "Save", class: "btn c-btn2" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="user-status" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Update Language</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <%= form_for :user, url: users_edit_url(@user), action: :update, method: :post, html: {id: 'user-status'} do |f| %>
+              <div class="modal-body">
+                <%= f.select(:status, options_for_select([["Online", true], ["Offline", false]]), {}, {class: "select is-fullwidth"}) %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn c-btn" data-dismiss="modal">Close</button>
+                <%= f.submit "Save", class: "btn c-btn2" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <footer>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3">
+              <h2>Contact Info</h2>
+              <ul>
+                <li>Phone: 125 1254 1245</li>
+                <li>Email: demo@gmail.com</li>
+                <li>Address: 24 kda New York, US</li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <h2>Useful link</h2>
+              <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Legal</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <h2>Others link</h2>
+              <ul>
+                <li><a href="#">Rewards club</a></li>
+                <li><a href="#">Contact us via app</a></li>
+                <li><a href="#">Customer service</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <h2>Business</h2>
+              <ul>
+                <li><a href="#">Partner directory</a></li>
+                <li><a href="#">Become a partner</a></li>
+                <li><a href="#">Business support</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>

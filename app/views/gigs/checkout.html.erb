@@ -1,0 +1,119 @@
+
+  <%= render  "shared/navbar" %>
+
+  <div class="order-details mb-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <%= form_with model: [@gig, @gig.orders.new] do |f| %>
+      <%= hidden_field_tag 'pricing_type', @pricing.pricing_type %>
+          <div class="order-payment c-shadow mb-4">
+            <h3>Payment options</h3>
+
+            <hr class="mb-4">
+            <% @stripe_customer.sources.each do |payment| %>
+            <div class="custom-control custom-radio custom-control-inline d-block">
+
+
+              <%= radio_button_tag 'payment', payment.id, checked: true, class:"custom-control-input"%>
+              <%= payment.brand %> <%= "Card: **** **** **** " + payment.last4%>
+
+            </div>
+            <% end %>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+
+               <label class="custom-control-label" for="customRadioInline2">Your System Wallet (SEK<strong><%= current_user.wallet %></strong>)</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="order-item c-shadow">
+            <h3>Summary</h3>
+            <hr class="mb-4">
+            <%= image_tag gig_cover(@gig) %>
+            <h5><%= @gig.title %></h5>
+            <ul>
+              <li>Subtotal<span> SEK<%= '%.2f' % @pricing.price %></span></li>
+              <li>Service fee (<%= (@rate * 100).to_i %>%) <span>  SEK<%= '%.2f' % (@pricing.price * @rate) %> </span></li>
+              <li>Total<span>SEK<%= '%.2f' % (@pricing.price * (@rate + 1)) %> </span></li>
+              <li>Total delivery time<span><%= pluralize(@pricing.delivery_time, 'day') %></span></li>
+            </ul>
+                                    <%= f.submit "Place Your Order", class: "btn btn-danger" %>
+
+
+          </div>
+        </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <h2>Contact Info</h2>
+          <ul>
+            <li>Phone: 125 1254 1245</li>
+            <li>Email: demo@gmail.com</li>
+            <li>Address: 24 kda New York, US</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Useful link</h2>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Legal</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Others link</h2>
+          <ul>
+            <li><a href="#">Rewards club</a></li>
+            <li><a href="#">Contact us via app</a></li>
+            <li><a href="#">Customer service</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Business</h2>
+          <ul>
+            <li><a href="#">Partner directory</a></li>
+            <li><a href="#">Become a partner</a></li>
+            <li><a href="#">Business support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+<style>
+.button {
+  background-color: white;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.button.is-danger {
+  background-color: #f14668;
+  border-color: transparent;
+  color: #fff;
+}
+
+.button.is-fullwidth {
+  display: flex;
+  width: 100%;
+}
+
+</style>

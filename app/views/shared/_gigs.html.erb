@@ -1,0 +1,36 @@
+
+
+<div class="job">
+ <% @gigs.each do |gig| %>
+
+                <div class="job-item">
+                  <div class="job-item-logo">
+<%= link_to users_path(gig.user) do%>
+
+                    <%= image_tag avatar_url(gig.user) %>
+        <% end %>
+       <span class="star-review"><i class="fa fa-star"></i>
+                    <%= gig.average_rating %>
+                    <span class="has-text-primary">(<%= gig.reviews.count %>)</span>
+                </span>
+
+                  </div>
+
+
+
+                  <div class="job-item-content">
+                    <h2><%= link_to gig.title.truncate(40), gig_path(gig) %></h2>
+
+                    <p><%= gig.description%></p>
+                    <ul class="job-item-feature">
+                    <%= link_to gig_path(gig) do %>
+                      <li class="active">STARTING FROM SEK<%= gig.price %> <% end %></li>
+
+                    </ul>
+
+
+                  </div>
+                </div>
+
+                <% end %>
+</div>

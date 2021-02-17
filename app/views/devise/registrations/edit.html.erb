@@ -1,0 +1,60 @@
+<section class="hero is-primary is-fullheight">
+<div class="hero-body">
+  <div class="container">
+    <div class="columns is-centered">
+    <div class="column is-6-tablet is-6-desktop is-6-widescreen">
+    <div class="box">
+      <div class="field has-text-centered">
+      <strong>Edit Profile</strong>
+      </div>
+     
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :full_name, class:"label" %>
+    <%= f.text_field :full_name, autofocus: true, autocomplete: "full_name",class:"input" %>
+  </div>
+  <div class="field">
+    <%= f.label :vat, class:"label" %>
+    <%= f.text_field :vat, autofocus: true, autocomplete: "vat",class:"input" %>
+  </div>
+  <div class="field">
+    <%= f.label :email, class:"label" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"input" %>
+  </div>
+
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password , class:"label"%> <i>(leave blank if you don't want to change it) </i>
+    <%= f.password_field :password, autocomplete: "new-password" ,class:"input" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation , class:"label" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class:"input"%>
+  </div>
+
+
+  <div class="field">
+    <%= f.submit "Update", class:"button is-danger is-fullwidth m-t-10 m-b-10" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", :back , class:"button  is-fullwidth m-t-10 m-b-10" %>
+
+
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+</section>

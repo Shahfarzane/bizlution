@@ -1,0 +1,105 @@
+<%= render  "shared/navbar" %>
+
+<div class="gig-view mb-4">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="gig-view-details c-shadow">
+        <h3 class="mb-4"><%= @request.title %></h3>
+        <p class="mb-1"><%= @request.category.name %></p>
+        <p class="mb-1">Need to be delivered in: <%= @request.delivery %> days | Offers: <%= @request.offers.count %> | Budget: SEK<%= @request.budget %></p>
+        <p class="mb-1">Posted on: <%= @request.created_at.strftime('%d, %b %Y') %></p>
+        <p class="mt-5"><strong>Description</strong></p>
+        <hr>
+        <%= @request.description %>
+                            <% if @request.attachment_file.attached? %>
+                                <p>
+                                    <%= link_to url_for(@request.attachment_file),
+                                            class: "tag small is-warning m-t-20",
+                                            download: "Attachment_#{@request.attachment_file.id}" do %>
+
+                                        <i class="fas fa-paperclip fa-lg p-r-5"></i><%= @request.attachment_file.filename %>
+                                    <% end %>
+                                </p>
+                            <% end %>
+      </div>
+      <div class="job-profile-info mt-4">
+         <%= image_tag avatar_url(@request.user), class: "rounded" %>
+        <div class="text-center mb30">
+          <h2><%= @request.user.full_name %>
+          </h2>
+          <a href="tel:123-456-7890" class="job-profile-rating c-btn c-white d-table mt-3 mx-auto">Contact</a>
+        </div>
+        <hr>
+        <ul>
+          <li>Member since <strong><%= @request.user.created_at.strftime('%b %Y') %></strong></li>
+          <li>From <strong><%= @request.user.from %></strong></li>
+        </ul>
+        <hr>
+        <p class="mt-5"><strong>About user:</strong></p>
+              <p>
+              <%= @request.user.about %> </p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="order-item c-shadow">
+        <%= form_for Offer.new do |f| %>
+          <div class="form-group">
+          <%= f.hidden_field :request_id, value: @request.id %>
+            <label for="inputid1"><strong>Amount (SEK)</strong></label>
+            <%= f.text_field :amount, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="inputid4"><strong>Deliver in (days)</strong></label>
+            <%= f.text_field :days, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="inputid2"><strong>Offer note</strong></label>
+            <%= f.text_area :note, class: "form-control" %>
+          </div>
+          <button type="submit" class="btn">Send offer</button>
+
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+</div>
+<footer>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>Contact Info</h2>
+      <ul>
+        <li>Phone: 125 1254 1245</li>
+        <li>Email: demo@gmail.com</li>
+        <li>Address: 24 kda New York, US</li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      <h2>Useful link</h2>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Legal</a></li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      <h2>Others link</h2>
+      <ul>
+        <li><a href="#">Rewards club</a></li>
+        <li><a href="#">Contact us via app</a></li>
+        <li><a href="#">Customer service</a></li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      <h2>Business</h2>
+      <ul>
+        <li><a href="#">Partner directory</a></li>
+        <li><a href="#">Become a partner</a></li>
+        <li><a href="#">Business support</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</footer>

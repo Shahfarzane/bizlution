@@ -1,0 +1,94 @@
+
+    <%= render  "shared/navbar" %>
+
+  <div class="user-earning">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>My Offers</h2>
+
+
+
+            <div class="user-earing-item">
+              <h5 class="mb-3">Transaction History</h5>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col">Request title</th>
+                      <th scope="col">Budget</th>
+                      <th scope="col">Ofter amound</th>
+                      <th scope="col">Delivery in</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if @offers.blank? %>
+                    <tr>
+                      <td colspan="6" class="has-text-centered">
+                        <h1>NOTHING TO SHOW HERE</h1>
+                      </td>
+                    </tr>
+                    <% end %>
+                    <% @offers.each do |o| %>
+                    <tr>
+                      <td><%= o.created_at.strftime('%d, %b %Y') %></td>
+                      <td>
+                        <%= link_to o.request.title, request_path(o.request) %>
+                      </td>
+                      <td> SEK<%= o.request.budget %></td>
+                      <td>SEK<%= o.amount %></td>
+                      <td><%= pluralize(o.days, 'day') %></td>
+                      <td> <span class="tag <%= 'text-warning' if o.pending? %>
+                                             <%= 'text-success' if o.accepted? %>
+                                             <%= 'text-danger' if o.rejected? %> ">
+                          <%= o.status.capitalize %>
+                        </span></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <h2>Contact Info</h2>
+            <ul>
+              <li>Phone: 125 1254 1245</li>
+              <li>Email: demo@gmail.com</li>
+              <li>Address: 24 kda New York, US</li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h2>Useful link</h2>
+            <ul>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Legal</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h2>Others link</h2>
+            <ul>
+              <li><a href="#">Rewards club</a></li>
+              <li><a href="#">Contact us via app</a></li>
+              <li><a href="#">Customer service</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h2>Business</h2>
+            <ul>
+              <li><a href="#">Partner directory</a></li>
+              <li><a href="#">Become a partner</a></li>
+              <li><a href="#">Business support</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
