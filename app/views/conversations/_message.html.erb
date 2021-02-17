@@ -1,0 +1,16 @@
+<% if m.user.id == user.id %>
+                  <div class="chat-body-left">
+                    <div class="chat-body-content">
+                      <p><%= m.content %></p> </div>
+                    </div>
+                    <% else %>
+
+                      <div class="chat-body-right">
+                      <div class="chat-body-content">
+                        <p><%= m.content %></p>
+                      </div>
+                      <div>
+                    </div>
+
+                  </div>
+  <% end %>

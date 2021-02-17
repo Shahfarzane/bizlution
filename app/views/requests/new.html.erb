@@ -1,0 +1,99 @@
+
+    <%= render  "shared/navbar" %>
+
+  <div class="post-job mb-5 mt-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h3 class="text-center">What services are you looking for?</h3>
+          <%= form_for @request do |f| %>
+          <form action="">
+            <div class="form-group">
+              <label for="inputid1">Title (*)</label>
+              <%= f.text_field :title, placeholder: "I request...", class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <label for="inputid2">Description (*)</label>
+
+                <%= f.text_area :description, placeholder: "I'm looking for...", class: "form-control",rows:"5", id:"inputid2" %>
+            </div>
+            <div class="form-group">
+              <label for="inputid3">Category</label>
+
+
+                <%= f.select(:category_id, options_for_select(@categories.map { |c| [c.name, c.id] }),{ class: "form-control custom-select" }) %>
+
+            </div>
+            <div class="form-group">
+              <label for="inputid4">Delivery</label>
+              <%= f.number_field :delivery, placeholder: "1-30 days", class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <label for="inputid5">Budget</label>
+              <%= f.number_field :budget, placeholder: "$5 minimum", class: "form-control" %>
+            </div>
+              <div class="form-group">
+                  <%= f.file_field :attachment_file, class: "file-input" %>
+                  <label for="inputid6">Upload attachment (Optional)</label>
+                </div>
+            <button type="submit" class="btn">Post Job</button>
+          </form>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <h2>Contact Info</h2>
+          <ul>
+            <li>Phone: 125 1254 1245</li>
+            <li>Email: demo@gmail.com</li>
+            <li>Address: 24 kda New York, US</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Useful link</h2>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Legal</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Others link</h2>
+          <ul>
+            <li><a href="#">Rewards club</a></li>
+            <li><a href="#">Contact us via app</a></li>
+            <li><a href="#">Customer service</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Business</h2>
+          <ul>
+            <li><a href="#">Partner directory</a></li>
+            <li><a href="#">Become a partner</a></li>
+            <li><a href="#">Business support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- scripts -->
+  <script>
+    $(document).ready(function() {
+        var file = $('.file-input');
+        file.change(function(e) {
+            if (file[0].files.length > 0) {
+                var attachment = file[0].files[0];
+                $('.file-name').text(attachment.name + " (" + attachment.size + " bytes)");
+            }
+        })
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<div class="step-content <%= 'is-active' if @step == 1 %>">
+<fieldset>      
+  <label class="label">Gig Title</label>
+        <%= f.text_area :title, autocomplete: "title", class: "form-control" %>
+                <label class="label">Category         <%= f.select(:category_id, options_for_select(@categories.map{ |c| [c.name, c.id] }, selected: @gig.category_id), class:"custom-select") %>
+</label>
+                <label class="checkbox">
+            <%= f.check_box :has_single_pricing, class: "checkbox", onchange: "this.form.submit();" %> Has Single Price
+        </label>
+    </<fieldset>>
+
+
+</div>
+
+
+  <script src="https://demo-bizlution.netlify.app/assets/js/jquery.easing.min.js"></script>
+  <script src="https://demo-bizlution.netlify.app/assets/js/custom.js"></script>

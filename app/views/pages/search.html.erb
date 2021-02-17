@@ -1,0 +1,140 @@
+
+<%= render  "shared/navbar" %>
+<%= render 'shared/categories' %>
+
+<div class="container-fluid mb-4">
+    <div class="row">
+      <div class="col-md-3">
+        <%= form_tag '', method: :get do %>
+<%= hidden_field_tag 'category', @category ? @category.id : '' %>
+<%= hidden_field_tag 'sort', @sort %>
+        <div class="c-shadow">
+        <h5 class="mb-3 mt-4">Sort</h5>
+                <div class="input-group">
+
+
+                    <%= select_tag 'sort', options_for_select(
+                        [
+                            ['Price Low to High', 'price asc'],
+                            ['Price High to Low', 'price desc'],
+                            ['Latest First', 'gigs.created_at desc'],
+                            ['Oldest First', 'gigs.created_at asc']
+                        ], selected: @sort
+                    ), onchange: "this.form.submit();", class: "form-control" %>
+
+                </div>
+          <hr>
+          <h5 class="mb-3 mt-4">Price Range</h5>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">SEK</span>
+            </div>
+            <%= number_field_tag 'min', @min || '', class: "form-control", placeholder: "Min" %>
+
+          </div>
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">SEK</span>
+            </div>
+            <%= number_field_tag 'max', @max || '', class: "form-control", placeholder: "Max" %>
+
+          </div>
+          <hr>
+
+                                              <%= radio_button_tag 'delivery', "1", checked = "1" == @delivery %> Up to 1 days <br>
+                                    <%= radio_button_tag 'delivery', "3", checked = "3" == @delivery %> Up to 3 days <br>
+                                    <%= radio_button_tag 'delivery', "7", checked = "7" == @delivery %> Up to 7 days <br>
+                                    <%= radio_button_tag 'delivery', "10", checked = "10" == @delivery %> Up to 10 days <br>
+                                    <%= radio_button_tag 'delivery', "15", checked = "15" == @delivery %> Up to 15 days <br>
+                                    <%= radio_button_tag 'delivery', "0", checked = "0" == @delivery %> Any
+          <hr>
+          <button class="btn c-btn d-block w-100 mb-3">Apply</button>
+           <% end %>
+           <%= form_tag '', method: :get do %>
+          <button class="btn c-btn2 d-block w-100">Clear all Filters</button>
+          <% end %>
+
+        </div>
+
+      </div>
+      <div class="col-md-6 col-lg-8">
+            <%= form_tag search_path, method: :get do %>
+
+        <div class="search-bar">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text input-group-text-search"><svg width="1em" height="1em" viewBox="0 0 16 16"
+                  class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                  <path fill-rule="evenodd"
+                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                </svg></span>
+            </div>
+          <%= text_field_tag 'q', '', class: "form-control", placeholder: "Search for a service" %>
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <div class="btn-group dropdown-filter">
+              <div class="btn-group dropdown-filter">
+
+                <button type="submit" class="btn">
+                  Search
+                </button>
+                 <% end %>
+
+              </div>
+                  <ul class="dropdown-menu">
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Country</li>
+                    <li>
+                      <label>
+                        <input type="checkbox">United States
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox">United Kingdom
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox">Australia
+                      </label>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Region</li>
+                    <li>
+                      <label>
+                        <input type="checkbox">London
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox">Singapore
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox">Tokyo
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <!-- here is the new part -->
+
+
+
+           <%= render partial: 'shared/gigs', object: @gigs %>
+
+
+
+
+      </div>
+    </div>
+  </div>

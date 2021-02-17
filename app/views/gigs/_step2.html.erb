@@ -1,0 +1,36 @@
+<div class="step-content <%= 'is-active' if @step == 2 %>">
+    <div class="fields">
+
+        <div class="control">
+            <div class="columns  form-price">
+
+                <%= f.fields_for :pricings, @gig.pricings.order(:pricing_type) do |p| %>
+                    <div class="column form-price-item <%= 'is-4 is-offset-4' if @gig.has_single_pricing && p.object.basic? %>
+                                      <%= 'is-hidden' if @gig.has_single_pricing && !p.object.basic? %> ">
+                        <label for="" class="label"><%= p.object.pricing_type.capitalize %></label>
+                        <%= p.hidden_field :pricing_type %>
+
+                        <div class="form-price-content">
+                            <%= p.text_field :title, placeholder: "Title", class: "form-control" %>
+                        </div>
+
+                        <div class="form-price-content">
+                            <%= p.text_area :description, placeholder: "Description", class: "form-price-content" %>
+                        </div>
+
+                        <div class="control has-icons-right">
+                            <%= p.number_field :delivery_time, placeholder: "Delivery Time", class: "form-price-content", default: 1 %>
+                        </div>
+
+                        <div class="control has-icons-right">
+                            <%= p.number_field :price, placeholder: "Price", class: "input is-radiusless", default: 1 %>
+                        </div>
+
+                    </div>
+                <% end %>
+
+            </div>
+        </div>
+
+    </div>
+</div>

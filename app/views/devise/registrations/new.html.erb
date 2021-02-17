@@ -1,0 +1,47 @@
+  <%= render  "shared/navbar" %>
+
+
+<div>
+<div class="form-access">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+    <form>
+      <span>Create Account</span>
+      <div class="form-group">
+    <%= f.label :full_name, class:"input" %>
+    <%= f.text_field :full_name, autofocus: true, autocomplete: "full_name", class: "form-control" %>
+      </div>
+      <div class="form-group">
+    <%= f.label :email, class:"label" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+          </div>
+
+ <div class="form-group">
+    <%= f.label :vat, class:"input" %>
+    <%= f.text_field :vat, autofocus: true, autocomplete: "vat", class: "form-control" %>
+      </div>
+      <div class="form-group">
+    <%= f.label :password, class:"label"%>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password",class:"form-control" %>
+          </div>
+      <div class="form-group">
+    <%= f.label :password_confirmation,class:"label" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+          </div>
+      <div class="custom-control">
+      <label><%= f.check_box :terms, {checked: true} %>I agree to the <a href="terms.html">Terms&Conditions</a></label>
+    
+
+      </div> 
+
+<button type="submit" class="btn btn-primary"> Create Account</button>
+
+    </form>
+    <h2>Already have an account? <a href="login.html">Sign in here</a></h2>
+  </div>
+</div>
+  <% end %>
+  </div>

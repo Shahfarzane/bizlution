@@ -1,0 +1,31 @@
+    <%= render  "shared/navbar" %>
+
+<div class="form-access">
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+    <form>
+      <span>Sign In</span>
+      <div class="form-group">
+            <%= f.label :email, class: "label" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control" %>
+      </div>
+      <div class="form-group">
+            <%= f.label :password , class: "label"%>
+    <%= f.password_field :password, autocomplete: "current-password" , class: "form-control" %>
+      </div>
+      <div class="text-right">
+        <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-right" %>
+      </div>
+
+     <% if devise_mapping.rememberable? %>
+    <div class="custom-control custom-checkbox">
+      <%= f.check_box :remember_me, id:"form-checkbox" %>  Remember me ?
+    </div>
+  <% end %>
+         <div>
+          <button type="submit" class="btn btn-primary"> Sign in</button>
+</div>
+    </form>
+    <%= link_to  "Dont Have an Account?", new_user_registration_path, class: "btn-2" %>
+<% end %>
+  </div>

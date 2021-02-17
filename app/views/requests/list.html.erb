@@ -1,0 +1,109 @@
+
+    <%= render  "shared/navbar" %>
+
+  <div class="user-earning">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>All requests</h2>
+
+          <div class="user-earing-item user-earing-withdraw">
+            <%= form_tag '', method: :get do %>
+            <div class="form-group mb-2">
+              <div class="form-group">
+                <%= select_tag 'category', content_tag(:option, 'All Categories', value: "") +
+                                        options_for_select(@categories.map { |c| [c.name, c.id] },
+                                        selected: @category_id),
+                                        onchange: "this.form.submit();" %>
+              </div>
+            </div>
+            <% end %>
+
+
+          </div>
+          <div class="user-earing-item">
+            <h5 class="mb-3">Active requests</h5>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Buyer</th>
+                    <th scope="col">Request</th>
+                    <th scope="col">Offers</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Budget</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if @requests.blank? %>
+                  <tr>
+                    <td colspan="6" class="has-text-centered">
+                      <h1>NOTHING TO SHOW HERE</h1>
+                    </td>
+                  </tr>
+                  <% end %>
+                  <% @requests.each do |r| %>
+                  <tr>
+                    <td><%= r.created_at.strftime('%d, %b %Y') %></td>
+                    <td>
+                      <figure class="image is-48x48">
+                        <%= image_tag avatar_url(r.user), class: "is-rounded" %>
+                      </figure>
+                    </td>
+                    <td> <%= link_to request_path(r), class: "tootip" do %>
+                      <label for="" class="tooltip" data-tooltip="<%= r.description %>">
+                        <%= r.title.truncate(25, seperator: ' ') %>
+                      </label>
+                      <% end %></td>
+                    <td><%= r.offers.count%></td>
+                    <td><%= pluralize(r.delivery, 'day') %></td>
+                    <td>SEK<%= r.budget %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <h2>Contact Info</h2>
+          <ul>
+            <li>Phone: 125 1254 1245</li>
+            <li>Email: demo@gmail.com</li>
+            <li>Address: 24 kda New York, US</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Useful link</h2>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Legal</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Others link</h2>
+          <ul>
+            <li><a href="#">Rewards club</a></li>
+            <li><a href="#">Contact us via app</a></li>
+            <li><a href="#">Customer service</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Business</h2>
+          <ul>
+            <li><a href="#">Partner directory</a></li>
+            <li><a href="#">Become a partner</a></li>
+            <li><a href="#">Business support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>

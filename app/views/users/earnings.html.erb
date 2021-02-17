@@ -1,0 +1,110 @@
+
+      <%= render  "shared/navbar" %>
+
+  <div class="user-earning">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Earnings</h2>
+          <div class="user-earing-item">
+            <ul>
+              <li>Net income<span>SEK<%= @net_income %></span></li>
+              <li>Withdrawn<span>SEK<%= @withdrawn %></span></li>
+              <li>Used for Purchases<span>SEK<%= @purchased %></span></li>
+              <li>Pending Clearance<span>SEK<%= @pending %></span></li>
+              <li>Available<span>SEK<%= @withdrawable %></span></li>
+            </ul>
+          </div>
+          <%= form_with url: withdraw_path do |f| %>
+          <div class="user-earing-item user-earing-withdraw">
+
+              <div class="form-group mb-2">
+                <h5>Withdraw Amount (SEK)</h5>
+              </div>
+
+              <div class="form-group ml-4 mr-3 mb-2  w-50">
+                <%= f.number_field :amount, value: 0, class: "form-control" %>
+
+              </div>
+              <button type="submit" class="btn c-btn mb-3">Send Request</button>
+
+
+          </div>
+          <% end %>
+
+          <div class="user-earing-item">
+            <h5 class="mb-3">Transaction History</h5>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Source</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @transactions.each do |t| %>
+                      <tr>
+                          <td><%= t.created_at.strftime('%d, %b %Y') %></td>
+                          <td><%= t.gig ? t.gig.title : "Withdraw Amount" %></td>
+                          <td><%= t.transaction_type %></td>
+                          <td><span class="tag"><%= t.status %></span></td>
+                          <td>
+                              <span class="<%= current_user.id == t.buyer_id ? 'text-danger' : 'text-success' %>">
+                                  <%= current_user.id == t.buyer_id ? '-' : '+' %>
+                                  SEK<%= current_user.id == t.buyer_id ? t.amount : (t.amount / 1.1).round(2) %>
+                              </span>
+                          </td>
+                      </tr>
+                  <% end %>
+
+                </tbody>
+              </table>
+              <%= paginate @transactions %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <h2>Contact Info</h2>
+          <ul>
+            <li>Phone: 125 1254 1245</li>
+            <li>Email: demo@gmail.com</li>
+            <li>Address: 24 kda New York, US</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Useful link</h2>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Legal</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Others link</h2>
+          <ul>
+            <li><a href="#">Rewards club</a></li>
+            <li><a href="#">Contact us via app</a></li>
+            <li><a href="#">Customer service</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h2>Business</h2>
+          <ul>
+            <li><a href="#">Partner directory</a></li>
+            <li><a href="#">Become a partner</a></li>
+            <li><a href="#">Business support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>

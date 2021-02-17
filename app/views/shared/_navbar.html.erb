@@ -1,0 +1,52 @@
+<header class="login-header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="/"><%= image_tag 'logo.svg' %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          
+          
+          <li class="nav-item">
+
+          </li>
+             <li class="nav-item">
+             <%= link_to 'Packages', plans_path, class: "nav-link"%>
+            <%= link_to 'Browse Gigs', search_path, class: "nav-link"%>
+          </li>
+        <% if (!user_signed_in?) %>
+        <div class="access-button">
+          <%= link_to  "Sign Up", new_user_registration_path, class: "btn-1" %>
+          <%= link_to  "Login", new_user_session_path, class: "btn-2" %>
+        </div>
+        <% else %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="menu-user-profile"><%= image_tag avatar_url(current_user), class: "rounded" %> <%= current_user.full_name %></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'Dashboard', dashboard_path, class: "dropdown-item" %>
+            <%= link_to  "Profile", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to 'Manage Requests', requests_path, class: "dropdown-item" %>
+              <%= link_to 'Post Request', new_request_path, class: "dropdown-item" %>
+              <%= link_to 'Active Requests', all_requests_path, class: "dropdown-item" %>
+              <%= link_to 'Selling Orders', selling_orders_path, class: "dropdown-item" %>
+              <a class="dropdown-item" href="#">Settings</a>
+              <a class="dropdown-item" href="#">Help & Support</a>
+              <div class="dropdown-divider"></div>
+              <%= link_to  "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
