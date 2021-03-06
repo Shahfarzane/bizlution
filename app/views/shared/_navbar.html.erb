@@ -16,9 +16,33 @@
           <li class="nav-item">
 
           </li>
-             <li class="nav-item">
-             <%= link_to 'Packages', plans_path, class: "nav-link"%>
+          <li class="nav-item">
+            <%= link_to 'Packages', plans_path, class: "nav-link"%>
             <%= link_to 'Browse Gigs', search_path, class: "nav-link"%>
+
+          </li>
+          <li class="nav-item">
+            <% if user_signed_in? %>
+              <a class="nav-link waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <i class="fas fa-bell"></i>
+                <span class="badge badge-danger ml-1">4</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5" style="top: 100%; right: auto; font-size: 12px;">
+              <a class="dropdown-item waves-effect waves-light wrap-ws" href="#">
+                UserTest has completed your order. 
+                <span class="notif-time">about 1h ago</span>
+              </a>
+              <a class="dropdown-item waves-effect waves-light wrap-ws" href="#">
+                UserTest has given you a feedback. 
+                <span class="notif-time">about 1h ago</span>
+              </a>
+              <a class="dropdown-item waves-effect waves-light wrap-ws" href="#">   UserTest has accepted your offer.
+                <span class="notif-time">about 1h ago</span>
+              </a>
+              <a class="dropdown-item waves-effect waves-light" href="#">   <button class="mark-as-complete-button btn-1">Mark as read</button>
+              </a>
+            </div>
+            <% end %>
           </li>
         <% if (!user_signed_in?) %>
         <div class="access-button">
