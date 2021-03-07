@@ -12,6 +12,7 @@ module NewProject
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     # config.i18n.fallbacks = [:en]
+   config.active_job.queue_adapter = :delayed_job
 
 
     # Settings in config/environments/* take precedence over those specified here.
