@@ -25,22 +25,16 @@
             <% if user_signed_in? %>
               <a class="nav-link waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <i class="fas fa-bell"></i>
-                <span class="badge badge-danger ml-1">4</span>
+                <span class="badge badge-danger ml-1" id="notification-count"><%= current_user.notifications.unread.count %></span>
               </a>
-              <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5" style="top: 100%; right: auto; font-size: 12px;">
-              <a class="dropdown-item waves-effect waves-light wrap-ws" href="#">
-                UserTest has completed your order. 
-                <span class="notif-time">about 1h ago</span>
-              </a>
-              <a class="dropdown-item waves-effect waves-light wrap-ws" href="#">
-                UserTest has given you a feedback. 
-                <span class="notif-time">about 1h ago</span>
-              </a>
-              <a class="dropdown-item waves-effect waves-light wrap-ws" href="#">   UserTest has accepted your offer.
-                <span class="notif-time">about 1h ago</span>
-              </a>
-              <a class="dropdown-item waves-effect waves-light" href="#">   <button class="mark-as-complete-button btn-1">Mark as read</button>
-              </a>
+              <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" id="notifications-wrapper" aria-labelledby="navbarDropdownMenuLink-5" style="top: 100%; right: auto; font-size: 12px;">
+              <div id="notifications"></div>
+              <% current_user.notifications.unread.each do |n| %>
+                <%= render partial: "notifications/#{n.notifiable_type.underscore.pluralize}/#{n.action}", locals: {notification: n}, formats:[:html] %>  
+              <% end %>
+              <%= link_to mark_as_read_path, method: :post, remote: true, class: "dropdown-item waves-effect waves-light" do %>
+                <button class="mark-as-complete-button btn-1">Mark as read</button>
+              <% end %>
             </div>
             <% end %>
           </li>

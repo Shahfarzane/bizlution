@@ -13,6 +13,7 @@ class ReviewsController < ApplicationController
                 review.seller = order.seller
 
                 if review.save
+                    Notification.create(recipient: order.seller, user: current_user, action: "review", notifiable: order.seller)
                     flash[:notice] = "Saved..."
                 else
                     flash[:alert] = "Cannot create review"
