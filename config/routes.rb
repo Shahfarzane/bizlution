@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   post '/comments', to: 'comments#create'
   post '/subscribe', to: 'subscriptions#subscribe'
   post '/webhook', to: 'subscriptions#webhook'
+  post '/mark_as_read', to: 'notifications#mark_all_as_read'
 
   put '/orders/:id/complete', to: 'orders#complete', as: 'complete_order'
   put '/offers/:id/accept', to: 'offers#accept', as: 'accept_offer'
