@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_114658) do
+ActiveRecord::Schema.define(version: 2021_03_07_023538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -84,6 +84,21 @@ ActiveRecord::Schema.define(version: 2020_12_05_114658) do
     t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
   create_table "gigs", force: :cascade do |t|
     t.string "title"
     t.string "video"
@@ -105,6 +120,18 @@ ActiveRecord::Schema.define(version: 2020_12_05_114658) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "recipient_id"
+    t.string "action"
+    t.string "notifiable_type"
+    t.integer "notifiable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "read", default: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "offers", force: :cascade do |t|
@@ -251,6 +278,7 @@ ActiveRecord::Schema.define(version: 2020_12_05_114658) do
   add_foreign_key "gigs", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "offers", "requests"
   add_foreign_key "offers", "users"
   add_foreign_key "orders", "gigs"

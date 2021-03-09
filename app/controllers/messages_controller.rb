@@ -26,6 +26,9 @@ class MessagesController < ApplicationController
                                   sender: render_message(@message, current_user),
                                   receiver: render_message(@message, receiver)
 
+   
+      Notification.create(recipient: conversation.receiver, user: current_user, action: "message", notifiable: conversation)
+
       if URI(request.referrer).path == conversation_detail_path(id: receiver.id)
         return render json: {success: true}
       end

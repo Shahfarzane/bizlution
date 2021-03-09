@@ -1,0 +1,5 @@
+
+<%= link_to order_detail_path(notification.notifiable_id), class: "dropdown-item waves-effect waves-light wrap-ws" do %>
+	<div><%= notification.user.email %> has accepted your order!</div>
+    <span class="notif-time"><%= time_ago_in_words(notification.created_at) %></span>
+<% end %>
