@@ -30,6 +30,7 @@ class OffersController < ApplicationController
 
             if charge(@offer.request, @offer)
                 flash[:notice] = "Accepted..."
+                Notification.create(recipient: @offer.user, user: current_user, action: "order_accept", notifiable: @offer.request.orders.last)
                 return redirect_to buying_orders_path
             else
                 flash[:alert] = "cannot create your order"
