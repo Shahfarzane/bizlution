@@ -5600,4 +5600,22 @@ a.tag:hover {
   font-weight: 600;
 }
 
+
 /*# sourceMappingURL=style.css.map */
+
+.wrap-ws {
+    white-space:  normal !important;
+}
+
+.notif-time {
+    display: block;
+    font-size: smaller;
+}
+
+.mark-as-complete-button {
+    border-radius: 8px;
+    border: 1px solid #fc8eac;
+    color: #fc8eac;
+    background: #ffffff;
+    width: 100%;
+}
