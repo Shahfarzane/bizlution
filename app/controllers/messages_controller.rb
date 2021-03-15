@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
 
    
       Notification.create(recipient: conversation.receiver, user: current_user, action: "message", notifiable: conversation)
-
+      NotificationMailer.delay.order_message(conversation.receiver.email)
       if URI(request.referrer).path == conversation_detail_path(id: receiver.id)
         return render json: {success: true}
       end
