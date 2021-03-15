@@ -1,1 +1,7 @@
-tmp/
+/log/*
+/tmp/*
+
+# Ignore precompiled javascript packs
+/public/packs
+/public/packs-test
+/public/assets
