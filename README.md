@@ -1,24 +1,63 @@
-# README
+# Bizlution
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A service marketplace platform built with Ruby on Rails where users can browse, book, and pay for services. Features real-time notifications, scheduling, ratings, and a full admin panel.
 
-Things you may want to cover:
+## Tech Stack
 
-* Ruby version
+- **Backend:** Ruby 2.7.2, Rails 6.0
+- **Database:** PostgreSQL
+- **Frontend:** Bulma CSS, Webpacker, jQuery
+- **Payments:** Stripe
+- **Background Jobs:** Delayed Job
+- **Real-time:** Action Cable + Redis
 
-* System dependencies
+## Setup
 
-* Configuration
+### Prerequisites
 
-* Database creation
+- Ruby 2.7.2
+- Node.js 15+
+- PostgreSQL
+- Redis
+- Yarn
 
-* Database initialization
+### Installation
 
-* How to run the test suite
+```bash
+bundle install
+yarn install
+rails db:create db:migrate db:seed
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Environment Variables
 
-* Deployment instructions
+Create a `.env` file in the root directory with the following:
 
-* ...
+```
+STRIPE_PUBLISHABLE_KEY=your_key
+STRIPE_SECRET_KEY=your_key
+SENDGRID_API_KEY=your_key
+```
+
+### Running the App
+
+```bash
+rails server
+```
+
+Or use the Procfile:
+
+```bash
+bin/rails server
+```
+
+## Features
+
+- User authentication (Devise + Facebook OAuth)
+- Service listings and bookings
+- Calendar scheduling (FullCalendar)
+- Stripe payment processing
+- Star ratings and reviews
+- Real-time notifications (Action Cable)
+- File uploads (Active Storage + Dropzone)
+- Admin dashboard (Trestle)

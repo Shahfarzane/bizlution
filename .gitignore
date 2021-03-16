@@ -1,1 +1,41 @@
-tmp/
+# Ignore bundler config
+/.bundle
+
+# Ignore all logfiles and tempfiles
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore node modules
+/node_modules
+
+# Ignore environment files
+*.env
+.env*
+
+# Ignore master key and credentials
+/config/master.key
+/config/credentials/*.key
+
+# Ignore Redis dump
+dump.rdb
+
+# Ignore macOS files
+.DS_Store
+
+# Ignore yarn debug log
+yarn-error.log
+yarn-debug.log
+
+# Ignore storage files
+/storage/*
+!/storage/.keep
+
+# Ignore public assets (compiled)
+/public/assets
+/public/packs
+/public/packs-test
+
+# Ignore byebug history
+.byebug_history
