@@ -66,7 +66,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   #These settings are for the sending out email for active admin and consequently the   devise mailer
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = :smtp
   
     config.action_mailer.smtp_settings = {
       port: 587,
