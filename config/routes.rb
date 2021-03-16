@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   Rails.application.routes.default_url_options[:host] = "bizlution.se"
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   get 'message/create'
   root 'pages#home'
 
