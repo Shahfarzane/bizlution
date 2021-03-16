@@ -1,1 +1,1 @@
-Redis.new(:host => 'localhost', :port => 3000)
+Redis.new(:host => 'localhost', :port => 6379)
