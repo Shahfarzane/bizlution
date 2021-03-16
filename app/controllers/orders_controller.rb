@@ -31,7 +31,8 @@ class OrdersController < ApplicationController
         if !@order.completed?
             if @order.completed!
                 flash[:notice] = "Saved..."
-                Notification.create(recipient: @order.seller, user: current_user, action: "order_complete", notifiable: @order)      
+                Notification.create(recipient: @order.seller, user: current_user, action: "order_complete", notifiable: @order, special_id: @order.id)
+                NotificationMailer.delay.order_complete(@order.seller.email)
             else
                 flash[:aler] = "Something went wrong..."
             end
